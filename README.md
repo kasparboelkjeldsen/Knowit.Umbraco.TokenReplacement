@@ -6,6 +6,9 @@ Token Replacement will replace any {{your.dictionary.item}} with the correspondi
 
 **TokenReplacement** currently supports Umbraco 10 to 13.
 
+[Watch a brief video of how it works](https://vimeo.com/1022816877#t=0)
+
+
 ## Installation
 
 You will need to add our middleware as the last step in the pipeline. This is done by adding the following line to your `Program.cs` or `Startup.cs` file:

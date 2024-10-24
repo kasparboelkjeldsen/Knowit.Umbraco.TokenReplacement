@@ -1,0 +1,28 @@
+{
+  "name": "Knowit.Umbraco.TokenReplacement.frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ./build/build.js",
+    "watch": "node ./build/watch.js ./../../Umbraco wwwroot/app_plugins/knowit.umbraco.tokenreplacement.Frontend",
+    "init-umbraco": "node build/umbraco.js init-umbraco",
+    "test-umbraco": "node build/umbraco.js test-umbraco",
+    "remove-umbraco": "node build/umbraco.js remove-umbraco",
+    "usync": "node build/umbraco.js usync",
+    "publish": "node build/umbraco.js publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.9.0",
+    "gulp": "^5.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-copy": "^5.0.0",
+    "gulp-watch": "^5.0.1",
+    "inquirer": "^10.1.8"
+  }
+}

@@ -1,20 +1,45 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Knowit.Umbraco.TokenReplacement
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Ever wanted to use Umbracos translations in a text field or rich text editor? Now you can!
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Token Replacement will replace any {{your.dictionary.item}} with the corresponding translation at runtime. Also throug Content Delivery API
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+**TokenReplacement** currently supports Umbraco 10 to 13.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Installation
+
+You will need to add our middleware as the last step in the pipeline. This is done by adding the following line to your `Program.cs` or `Startup.cs` file:
+
+```csharp
+app.UseUmbraco()
+    .WithMiddleware(u =>
+    {
+        u.UseBackOffice();
+        u.UseWebsite();
+        u.AppBuilder.UseMiddleware<TokenReplacementMiddleWare>(); // this one!!!
+    })
+    .WithEndpoints(u =>
+    {
+        u.UseInstallerEndpoints();
+        u.UseBackOfficeEndpoints();
+        u.UseWebsiteEndpoints();
+    });
+```
+
+It is important that it is the last middleware in the pipeline, as it needs to be able to replace the tokens in the response body after Umbraco has already processed it.
+
+## How to use
+
+After installation, simply type "{{" in a text field or rich text editor, and you will see a list of all available tokens. Select the token you want to use, and it will be replaced with the corresponding translation at runtime.
+
+## Configuration options
+
+In case you don't wish to include your entire dictionary in the options for Token Replacement, you can limit the options by inserting the following in your appsettings
+
+```json
+"Knowit.Umbraco.TokenReplacement": {
+    "TokenKey": "token."
+  },
+```
+
+After which, Token Replacement will only replace tokens that start with `token.` or whatever you choose.

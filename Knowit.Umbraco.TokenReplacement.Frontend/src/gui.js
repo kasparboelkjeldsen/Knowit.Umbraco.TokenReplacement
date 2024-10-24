@@ -5,7 +5,6 @@ let wlocation = window.location.href;
 function urlChange() {
     if (wlocation != window.location.href) {
         wlocation = window.location.href;
-        console.log(wlocation);
         eventListeners = {};
 
         if(!wlocation.includes('umbraco#/content')) {
@@ -389,9 +388,6 @@ function BuildMenuBox(boxPosition, key, element, id) {
     document.body.appendChild(boxDiv);
 
     // Check if boxDiv has a parent with div[ng-show="infiniteMode"]
-    
-
-    console.log(hasInfiniteModeParent); // true if a parent is found, false otherwise
 
     boxDiv.addEventListener('click', (e) => {
         // Create the input field
